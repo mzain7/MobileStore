@@ -70,6 +70,9 @@ namespace MobileStore
                 string contact = textBoxContact.Text.Trim();
                 string email = textBoxEmail.Text.Trim();
 
+                Int64.Parse(contact);
+                Int64.Parse(cnic);
+
                 //string query = @"INSERT INTO dbo.Employees (FirstName, LastName, CNIC, Title, Salary, DOB,
                   //  HireDate, [Address], City, Contact, EMail)
                     //VALUES (@FirstName, @LastName, @CNIC, @Title, @Salary, @DOB, @HireDate,
@@ -119,7 +122,10 @@ namespace MobileStore
 
         private void DeleteBtn_Click(object sender, EventArgs e)
         {
-            if (rowIndex == -1 || rowIndex >= dataTable.Rows.Count)
+            try
+            {
+
+                if (rowIndex == -1 || rowIndex >= dataTable.Rows.Count)
             {
                 MessageBox.Show("Please select a row.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -150,6 +156,12 @@ namespace MobileStore
 
             }
         }
+            catch (Exception)
+            {
+                MessageBox.Show("Please Try Again!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+}
         private void ClearTextboxes()
         {
             textBoxId.Clear();
@@ -195,7 +207,10 @@ namespace MobileStore
 
         private void SearchBtn_Click(object sender, EventArgs e)
         {
-            using (SqlConnection connection = DbConnection.GetConnection())
+            try
+            {
+
+                using (SqlConnection connection = DbConnection.GetConnection())
             {
                 SqlCommand command = new SqlCommand("staff.uspSearchEmployee", connection);
 
@@ -224,6 +239,12 @@ namespace MobileStore
 
                 }
             }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Please Try Again!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
         }
 
         private void UpdateBtn_Click(object sender, EventArgs e)
@@ -245,6 +266,8 @@ namespace MobileStore
                 string contact = textBoxContact.Text.Trim();
                 string email = textBoxEmail.Text.Trim();
 
+                Int64.Parse(contact);
+                Int64.Parse(cnic);
                 using (SqlConnection connection = DbConnection.GetConnection())
                 {
                     connection.Open();

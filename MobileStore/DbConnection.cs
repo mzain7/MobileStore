@@ -6,7 +6,7 @@ namespace MobileStore
 {
     public class DbConnection
     {
-        public static string connectionString = "Data Source=PC\\SQLEXPRESS;Initial Catalog=MobileStore;Integrated Security=True";
+        public static string connectionString = "Data Source=PC\\SQLEXPRESS;Initial Catalog=Mobile;Integrated Security=True";
 
         public DbConnection()
         {

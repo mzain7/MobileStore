@@ -108,7 +108,9 @@ namespace MobileStore
 
         private void submit_Click(object sender, EventArgs e)
         {
-            if(employeeCombo.SelectedItem == null && string.IsNullOrEmpty(customerName.Text) && string.IsNullOrEmpty(customerContract.Text))
+            try
+            {
+                if (employeeCombo.SelectedItem == null && string.IsNullOrEmpty(customerName.Text) && string.IsNullOrEmpty(customerContract.Text))
             {
                 MessageBox.Show("Please fill the form.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -123,7 +125,10 @@ namespace MobileStore
             string contact = customerContract.Text;
             string email = customerEmail.Text;
             int customer = -1;
-            
+
+             Int64.Parse(cnic);
+                Int64.Parse(contact);
+
 
             int employeeid = int.Parse(employeeCombo.SelectedItem.ToString().Split(',')[0]);
             using (var connection = DbConnection.GetConnection())
@@ -236,6 +241,12 @@ namespace MobileStore
             ResetForm();
             dt.Clear();
             OrderTable.Update();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Please Try Again!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
 
         }
@@ -259,7 +270,9 @@ namespace MobileStore
         DataTable dt = new DataTable();
         private void addBtn_Click(object sender, EventArgs e)
         {
-            if (BrandCombo.SelectedItem == null || ModelCombo.SelectedItem == null)
+            try
+            {
+                if (BrandCombo.SelectedItem == null || ModelCombo.SelectedItem == null)
             {
                 MessageBox.Show("Please fill the form.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -305,6 +318,12 @@ namespace MobileStore
 
             ResetForm();
             updateTotal();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Please Try Again!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
         }
         int rowIndex = -1;
         private void OrderTable_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -349,7 +368,9 @@ namespace MobileStore
 
         private void deleteBtn_Click(object sender, EventArgs e)
         {
-            if(rowIndex== -1)
+            try
+            {
+                if (rowIndex== -1)
             {
                 MessageBox.Show("Please select a row.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -357,6 +378,12 @@ namespace MobileStore
             dt.Rows.RemoveAt(rowIndex);
             OrderTable.Update();
             updateTotal();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Please Try Again!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
         }
 
         private void updateBtn_Click(object sender, EventArgs e)

@@ -43,7 +43,9 @@ namespace MobileStore
 
         private void DeleteBtn_Click(object sender, EventArgs e)
         {
-            if (rowIndex == -1 || rowIndex >= dataTable.Rows.Count)
+            try
+            {
+                if (rowIndex == -1 || rowIndex >= dataTable.Rows.Count)
             {
                 MessageBox.Show("Please select a row.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -75,6 +77,12 @@ namespace MobileStore
 
                 }
 
+            }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Please Try Again!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
         }
 
@@ -212,13 +220,15 @@ namespace MobileStore
 
         private void SearchBtn_Click(object sender, EventArgs e)
         {
-
-            // Create a SqlConnection object
-            using (SqlConnection connection = DbConnection.GetConnection())
+           try
             {
-                // Create a SqlCommand object
-                //"SELECT * FROM dbo.Products WHERE Brand LIKE @Brand AND Model LIKE @Model AND OS LIKE @OS AND RAM LIKE @RAM AND Storage LIKE @Storage AND Camera LIKE @Camera AND BatteryCapacity LIKE @BatteryCapacity AND Display LIKE @Display AND Processor LIKE @Processor AND Used = @Used AND [Description] LIKE @Description"
 
+                // Create a SqlConnection object
+                using (SqlConnection connection = DbConnection.GetConnection())
+            {
+                    // Create a SqlCommand object
+                    //"SELECT * FROM dbo.Products WHERE Brand LIKE @Brand AND Model LIKE @Model AND OS LIKE @OS AND RAM LIKE @RAM AND Storage LIKE @Storage AND Camera LIKE @Camera AND BatteryCapacity LIKE @BatteryCapacity AND Display LIKE @Display AND Processor LIKE @Processor AND Used = @Used AND [Description] LIKE @Description"
+                    
                 SqlCommand command = new SqlCommand("stock.uspSearchProduct", connection);
                 command.CommandType = CommandType.StoredProcedure;
                 command.Parameters.AddWithValue("@Brand", (!string.IsNullOrWhiteSpace(textBoxBrand.Text) ? "%" + textBoxBrand.Text + "%" : "%"));
@@ -251,6 +261,12 @@ namespace MobileStore
                     ProductTable.DataSource = dataTable;
                 }
 
+            }
+            }
+           catch (Exception)
+            {
+                MessageBox.Show("Please Try Again!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
 
         }

@@ -32,6 +32,8 @@ namespace MobileStore
                 string cname = textBoxCompanyName.Text.Trim();
                 string country = textBoxCounry.Text.Trim();
 
+                Int64.Parse(contact);
+            
                 string query = @"INSERT INTO stock.Suppliers (CompanyName, [Address], City, Contact, EMail, Country) output inserted.supplierID
                     VALUES (@CompanyName, @Address, @City, @Contact, @Email, @Country)";
 
@@ -40,7 +42,7 @@ namespace MobileStore
                 {
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
-                        command.CommandType = CommandType.StoredProcedure;
+                        //command.CommandType = CommandType.StoredProcedure;
                         command.Parameters.AddWithValue("@CompanyName", cname);
                         command.Parameters.AddWithValue("@Country", country);
                         command.Parameters.AddWithValue("@Address", address);
@@ -58,10 +60,10 @@ namespace MobileStore
                 this.form.UpdateSupplierBox(orderId.ToString() + " | " + cname);
 
             }
-            catch(Exception) {
+           catch(Exception) {
                 MessageBox.Show("Please Try Again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-            }
+           }
         }
 
         private void cancelBtn_Click(object sender, EventArgs e)

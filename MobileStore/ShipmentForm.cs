@@ -159,7 +159,9 @@ namespace MobileStore
 
         private void addBtn_Click(object sender, EventArgs e)
         {
-            if (BrandCombo.SelectedItem == null || ModelCombo.SelectedItem == null)
+            try
+            {
+                if (BrandCombo.SelectedItem == null || ModelCombo.SelectedItem == null)
             {
                 MessageBox.Show("Please fill the form.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -175,6 +177,12 @@ namespace MobileStore
             ShipTable.Update();
             ResetForm();
             updateTotal();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Please Try Again!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
 
         }
@@ -229,7 +237,9 @@ namespace MobileStore
         }
         private void deleteBtn_Click(object sender, EventArgs e)
         {
-            if (rowIndex == -1)
+            try
+            {
+                if (rowIndex == -1)
             {
                 MessageBox.Show("Please select a row.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -238,6 +248,12 @@ namespace MobileStore
             ShipTable.Update();
             updateTotal();
             rowIndex = -1;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Please Try Again!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
         }
 
         private void updateBtn_Click(object sender, EventArgs e)
@@ -295,8 +311,9 @@ namespace MobileStore
 
         private void submit_Click(object sender, EventArgs e)
         {
-
-            int employeeid = int.Parse(employeeCombo.SelectedItem.ToString().Split(' ')[0]);
+            try
+            {
+                int employeeid = int.Parse(employeeCombo.SelectedItem.ToString().Split(' ')[0]);
             int supplierid = int.Parse(supplierCombo.SelectedItem.ToString().Split(' ')[0]);
 
             using (var connection = DbConnection.GetConnection())
@@ -381,6 +398,13 @@ namespace MobileStore
             total.Text = "0.00";
             dt.Clear();
             ShipTable.Update();
+
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Please Try Again!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
         }
     }
 }
