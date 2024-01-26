@@ -1,0 +1,8 @@
+CREATE SCHEMA stock;
+GO
+
+CREATE SCHEMA sales;
+GO
+
+CREATE SCHEMA staff;
+GO
